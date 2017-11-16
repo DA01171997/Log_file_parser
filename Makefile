@@ -1,7 +1,5 @@
 #File: Makefile
-#Author: Duy Do
-#Author's email: duy.ado@fullerton.edu
-#Author's Github: https://github.com/DA01171997
+#Group Charlie's Members: Abhyuday Vatsavai, Duy Do, Hasibullah Ziai, Jason Lieu
 #Course: CPSC 254 Tue Thr 6:00
 #Start Date: 11/15/2017 
 #Date last Modified: 11/15/2017 11:32PM 
