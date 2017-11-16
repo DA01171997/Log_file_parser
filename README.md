@@ -1,6 +1,9 @@
 #Log_file_parser
+
 #Project Idea's Author: Thomas Nguyen
+
 #Project Idea's Author's email: thonguyen@fullerton.edu
+
 #Group Charlie's Members: Abhyuday Vatsavai, Duy Do, Hasibullah Ziai, Jason Lieu
 
 In this project you will design, implement, and test a log file parser that parses raw command data produced by another program.   
