@@ -12,5 +12,5 @@ main.o: main.cpp
 main.exe: main.o
 	g++ main.o -o main.exe
 clean:
-	rm -f main.o 
+	rm *.o *.exe 
 
