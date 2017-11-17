@@ -39,7 +39,7 @@ This section is only done if we get to a command_______________________________
 	int i = 0				//i is used to keep track of word
 	while(  i <= getWordCount )
 		Linecount++			//every line has 2 words
-			Make object for Line
+		Make object for Line
 		String data (hex)
 		Turn data into binary		//we have hex, need binary
 		cout<< “Line “ << linecount << “: word “<< i<<”: ” 
