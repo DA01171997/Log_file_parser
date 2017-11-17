@@ -2,15 +2,17 @@ We're going to split up the program into smaller tasks so we don't work on the s
 
 
 Abhyuday:
-
+Initial parsing of the log file.
 
 
 Duy:
-
+Everything else
 
 
 Hasibullah:
-
-
+Command Words
+Hex to binary
 
 Jason:
+Main
+Class
