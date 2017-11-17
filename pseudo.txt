@@ -1,0 +1,60 @@
+CLASS__________________________________________________________________________
+
+
+class Line
+	string command				//40000810	or	400002C0
+	string readwrite			//whether the command is Write or Read
+	int wordCount				//from data/2
+	string data
+	public Line(string text)
+		Do parsing here
+		
+	public string getCommand
+		if 0x40000810
+			return D-to-S
+		if 0x400002C0
+			return S-to-D
+	public string getReadWrite
+		return readwrite
+	public int getWordCount
+		return wordCount
+	public string getData
+		return data
+	destructor
+
+_______________________________________________________________________________
+MAIN___________________________________________________________________________
+
+
+
+int linecount = 0
+while(not end of file)
+	Look at each line
+	Skip 5 times 				//(useless objects before command)
+
+This section is only done if we get to a command_______________________________
+	if(command)
+	Make object Line for each line
+	cout<< “Line “ << linecount << “: “ << getReadWrite() << “ “ << getCommand<<”: “<<getWordCount<< “ words”
+	int i = 0				//i is used to keep track of word
+	while(  i <= getWordCount )
+		Linecount++			//every line has 2 words
+			Make object for Line
+		String data (hex)
+		Turn data into binary		//we have hex, need binary
+		cout<< “Line “ << linecount << “: word “<< i<<”: ” 
+		for(loop 2 times)		//goes through the 2 words
+		if(i = 0)	
+			Check bits, print according to chart
+		if(i = 1)			//Goes through each case in the chart
+		if(i = 4)			//could do switch case
+			…..
+			i++
+			Move to next line
+			cout<<endl
+__________________________________________________________________________
+
+else next line
+		
+
+
