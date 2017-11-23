@@ -67,8 +67,5 @@ int main() {
 	system("pause");
 
 	}
-	inFile.close();
-	//system("PAUSE");
-
 	return 0;
 }
