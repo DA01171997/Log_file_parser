@@ -65,7 +65,5 @@ int main() {
 	}
 	inFile.close();
 	system("pause");
-
-	}
 	return 0;
 }
