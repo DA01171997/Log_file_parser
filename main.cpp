@@ -2,12 +2,13 @@
 //Group Charlie's Members: Abhyuday Vatsavai, Duy Do, Hasibullah Ziai, Jason Lieu
 //Course: CPSC 254 Tue Thr 6:00
 //Start Date: 11/15/2017 -Duy Do
-//Date last Modified: 11/16/2017 12:03AM -Duy Do 
+//Date last Modified: 11/22/2017 5:40PM -Duy Do 
 
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <sstream>
+#include "parser.h"
 #include "Line.cpp"
 using std::cout;
 using std::endl;
@@ -64,5 +65,10 @@ int main() {
 	}
 	inFile.close();
 	system("pause");
+
+	}
+	inFile.close();
+	//system("PAUSE");
+
 	return 0;
 }
