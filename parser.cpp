@@ -2,8 +2,8 @@
 //Group Charlie's Members: Abhyuday Vatsavai, Duy Do, Hasibullah Ziai, Jason Lieu
 //Course: CPSC 254 Tue Thr 6:00
 //Start Date: 11/22/2017 -Duy Do
-//Date last Modified: 11/22/2017 5:40PM -Duy Do 
-//#pragma once
+//Date last Modified: 11/27/2017 10:29AM -Duy Do 
+#pragma once
 #include<string>
 #include<cmath>
 using std::string;
@@ -96,7 +96,6 @@ int hexTodecimal(string a) {
 	return (int) total;
 }
 int hexToNumWord(int a){
-	int bYTes = a / 8;
-	int NumWord = bYTes / 2;
+	int NumWord = a/ 2;
 		return NumWord;
 }
