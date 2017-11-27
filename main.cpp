@@ -51,9 +51,13 @@ int main() {
 				lineCount++;
 				iss >> useless >> alsoUseless >> time >> uselessToo >> veryUseless >> superUseless >> command >> data >> stillUseless >> ReadWrite;
 				Line SubLine = Line(command, ReadWrite, data);
+				string DataBinary = hexTobinary(SubLine.getData());
 				for (int subLineWord = 0; subLineWord < 2; subLineWord++) {
 					cout << "Line " << lineCount << ": word" << WordCount << ": ";
-					string DataBinary;
+					string HalfBinary;
+					if(subLineWord == 0){ /* first half of DataBinary is put into HalfBinary*/}
+					if(subLineWord == 1){/*second half of DataBinary is put into HalfBinary*/}
+					
 					//HEX TO BINARY
 					//if(subLineWord == 0)
 						//LOOK THROUGH FIRST 8 BITS
@@ -61,6 +65,16 @@ int main() {
 					//else
 						//LOOK THROUGH LAST 8 BITS
 						//PRINT ACCORDING TO CHART
+
+					if (WordCount == 0) {
+						cout << "Line " << lineCount << ": word" << WordCount << ": Rec_Ctrl = ";
+						if ( /*bit 14-13 is 00*/) { cout << 0 << endl; }
+						if ( /*bit 14-13 is 10*/) { cout << 2 << endl; }
+						if ( /*bit 14-13 is 11*/) { cout << 3 << endl; }
+					}
+
+
+
 					cout << endl;
 					WordCount++;
 				}
