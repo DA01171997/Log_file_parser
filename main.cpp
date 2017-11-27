@@ -56,10 +56,19 @@ int main() {
 				string DataBinary = hexTobinary(SubLine.getData());
 				for (int subLineWord = 0; subLineWord < 2; subLineWord++) {
 					cout << "Line " << lineCount << ": word " << WordCount << ": ";
-					string HalfBinary;
-					/*
-					if (subLineWord == 0) { /* first half of DataBinary is put into HalfBinary* }
-					if (subLineWord == 1) {/*second half of DataBinary is put into HalfBinary* }
+					string HalfBinary = "";
+					if (subLineWord == 0) {
+						for (int i = 0; i < 16; i++) {
+							cTemp = &DataBinary[i];
+							HalfBinary += (*cTemp);
+						}
+					}
+					if (subLineWord == 1) {
+						for (int i = 16; i < 32; i++) {
+							cTemp = &DataBinary[i];
+							HalfBinary += (*cTemp);
+						}
+					}
 
 					//HEX TO BINARY
 					//if(subLineWord == 0)
@@ -69,12 +78,12 @@ int main() {
 					//LOOK THROUGH LAST 8 BITS
 					//PRINT ACCORDING TO CHART
 
-					if (WordCount == 0) {
-					cout << "Line " << lineCount << ": word" << WordCount << ": Rec_Ctrl = ";
-					if ( /*bit 14-13 is 00) { cout << 0 << endl; }
-					if ( /*bit 14-13 is 10) { cout << 2 << endl; }
-					if ( /*bit 14-13 is 11) { cout << 3 << endl; }
-					}*/
+					//if (WordCount == 0) {
+					//cout << "Line " << lineCount << ": word" << WordCount << ": Rec_Ctrl = ";
+					//if ( /*bit 14-13 is 00) { cout << 0 << endl; }
+					//if ( /*bit 14-13 is 10) { cout << 2 << endl; }
+					//if ( /*bit 14-13 is 11) { cout << 3 << endl; }
+					//}*/
 
 
 					cout << endl;
@@ -101,15 +110,15 @@ int main() {
 					cout << "Line " << lineCount << ": word " << WordCount << ": ";
 					string HalfBinary = "";
 					if (subLineWord == 0) {
-						for (int i = 0; i < 4; i++) {
+						for (int i = 0; i < 16; i++) {
 							cTemp = &DataBinary[i];
-							HalfBinary.append(cTemp);
+							HalfBinary += (*cTemp);
 						}
 					}
-					else if (subLineWord == 1) {
-						for (int i = 4; i < 8; i++) {
+					if (subLineWord == 1) {
+						for (int i = 16; i < 32; i++) {
 							cTemp = &DataBinary[i];
-							HalfBinary.append(cTemp);
+							HalfBinary += (*cTemp); 
 						}
 					}
 					/*
