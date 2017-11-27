@@ -95,7 +95,3 @@ int hexTodecimal(string a) {
 	}
 	return (int) total;
 }
-int hexToNumWord(int a){
-	int NumWord = a/ 2;
-		return NumWord;
-}
