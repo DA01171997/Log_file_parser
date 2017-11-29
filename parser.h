@@ -98,4 +98,16 @@ int hexToNumWord(int a) {
 	int NumWord = a / 2;
 	return NumWord;
 }
+int binaryToDecimal(string a) {
+	int stringNum = a.length();
+	int counter = 0;
+	double total = 0;
+	char * c;
+	for (int i = (stringNum - 1); i > -1; i--) {
+		c = &a[i];
+		if (*c == '1') { total += (pow(2, counter) * 1); }
+		counter++;
+	}
+	return (int)total;
+}
 //#pragma once

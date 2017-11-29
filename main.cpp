@@ -55,7 +55,6 @@ int main() {
 				Line SubLine = Line(command, ReadWrite, data);
 				string DataBinary = hexTobinary(SubLine.getData());
 				for (int subLineWord = 0; subLineWord < 2; subLineWord++) {
-					cout << "Line " << lineCount << ": word " << WordCount << ": ";
 					string HalfBinary = "";
 					if (subLineWord == 0) {
 						for (int i = 0; i < 16; i++) {
@@ -70,20 +69,64 @@ int main() {
 						}
 					}
 
-					//HEX TO BINARY
-					//if(subLineWord == 0)
-					//LOOK THROUGH FIRST 8 BITS
-					//PRINT ACCORDING TO CHART
-					//else
-					//LOOK THROUGH LAST 8 BITS
-					//PRINT ACCORDING TO CHART
 
-					//if (WordCount == 0) {
-					//cout << "Line " << lineCount << ": word" << WordCount << ": Rec_Ctrl = ";
-					//if ( /*bit 14-13 is 00) { cout << 0 << endl; }
-					//if ( /*bit 14-13 is 10) { cout << 2 << endl; }
-					//if ( /*bit 14-13 is 11) { cout << 3 << endl; }
-					//}*/
+					switch (WordCount) {
+					case 0:
+						cout << "Line " << lineCount << ": word " << WordCount << ": Rec_ctrl = ";
+						if (binaryToDecimal(HalfBinary.substr(13, 2)) == 0) { cout << "0 (no recording)" << endl; }
+						else if (binaryToDecimal(HalfBinary.substr(13, 2)) == 2) { cout << "2 (no processing)" << endl; }
+						else if (binaryToDecimal(HalfBinary.substr(13, 2)) == 3) { cout << "3 (processing & recording)" << endl; }
+						break;
+					case 1:
+						cout << "Line " << lineCount << ": word " << WordCount << ": Cmd_Type = ";
+						if (binaryToDecimal(HalfBinary.substr(13, 3)) == 4) { cout << "4 (Type A)" << endl; }
+						else if (binaryToDecimal(HalfBinary.substr(13, 3)) == 5) { cout << "5 (Type B)" << endl; }
+						else if (binaryToDecimal(HalfBinary.substr(13, 3)) == 6) { cout << "6 (Type C)" << endl; }
+						break;
+					case 4:
+						cout << "Line " << lineCount << ": word " << WordCount << ": Rec_Raw = ";
+						if (binaryToDecimal(HalfBinary.substr(0, 1)) == 0) { cout << "0 (disable)" << endl; }
+						else if (binaryToDecimal(HalfBinary.substr(0, 1)) == 1) { cout << "1 (enable)" << endl; }
+						break;
+					case 5:
+						cout << "Line " << lineCount << ": word " << WordCount << ": Cmd_ID = " << binaryToDecimal(HalfBinary.substr(0, 7)) << endl;
+						break;
+					case 10:
+						cout << "Line " << lineCount << ": word " << WordCount << ": Num_Responses = " << binaryToDecimal(HalfBinary.substr(11, 5)) << endl;
+						break;
+					case 15:
+						cout << "Line " << lineCount << ": word " << WordCount << ": Reset_Enabled = ";
+						if (binaryToDecimal(HalfBinary.substr(2, 1)) == 0) { cout << "0 (disable)" << endl; }
+						else if (binaryToDecimal(HalfBinary.substr(2, 1)) == 1) { cout << "1 (enable)" << endl; }
+						break;
+					case 22:
+						cout << "Line " << lineCount << ": word " << WordCount << ": Direction = ";
+						if (binaryToDecimal(HalfBinary.substr(3, 1)) == 0) { cout << "0 (Right)" << endl; }
+						else if (binaryToDecimal(HalfBinary.substr(3, 1)) == 1) { cout << "1 (Left)" << endl; }
+						break;
+					case 32:
+						cout << "Line " << lineCount << ": word " << WordCount << ": Num_Samples = " << binaryToDecimal(HalfBinary.substr(0, 15)) << endl;
+						break;
+					case 37:
+						cout << "Line " << lineCount << ": word " << WordCount << ": Parity = ";
+						if (binaryToDecimal(HalfBinary.substr(15, 1)) == 0) { cout << "0 (even)" << endl; }
+						else if (binaryToDecimal(HalfBinary.substr(15, 1)) == 1) { cout << "1 (odd)" << endl; }
+						break;
+					case 38:
+						cout << "Test = ";
+						if (binaryToDecimal(HalfBinary.substr(14, 1)) == 0) { cout << "0 (disable)" << endl; }
+						else if (binaryToDecimal(HalfBinary.substr(14, 1)) == 0) { cout << "1 (enable)" << endl; }
+						break;
+					case 40:
+						cout << "Ctrl_Enable = ";
+						if (binaryToDecimal(HalfBinary.substr(7, 1)) == 0) { cout << "0 (disable)" << endl; }
+						else if (binaryToDecimal(HalfBinary.substr(7, 1)) == 0) { cout << "0 (disable)" << endl; }
+						break;
+					case 41:
+						cout << "Code = " << binaryToDecimal(HalfBinary.substr(8, 7)) << endl;
+						break;
+					}
+
 
 
 					cout << endl;
@@ -118,27 +161,17 @@ int main() {
 					if (subLineWord == 1) {
 						for (int i = 16; i < 32; i++) {
 							cTemp = &DataBinary[i];
-							HalfBinary += (*cTemp); 
+							HalfBinary += (*cTemp);
 						}
 					}
 					/*
-					if (subLineWord == 0) { /* first half of DataBinary is put into HalfBinary* }
-					if (subLineWord == 1) {/*second half of DataBinary is put into HalfBinary* }
-
-					//HEX TO BINARY
-					//if(subLineWord == 0)
-					//LOOK THROUGH FIRST 8 BITS
-					//PRINT ACCORDING TO CHART
-					//else
-					//LOOK THROUGH LAST 8 BITS
-					//PRINT ACCORDING TO CHART
-
 					if (WordCount == 0) {
 					cout << "Line " << lineCount << ": word" << WordCount << ": Rec_Ctrl = ";
 					if ( /*bit 14-13 is 00) { cout << 0 << endl; }
 					if ( /*bit 14-13 is 10) { cout << 2 << endl; }
 					if ( /*bit 14-13 is 11) { cout << 3 << endl; }
 					}*/
+
 
 
 
