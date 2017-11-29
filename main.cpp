@@ -18,6 +18,14 @@ int main() {
 	std::ifstream inFile;
 	std::ofstream outFile;
 	char * cTemp;
+	float StoDRead;
+	float StoDWrite;
+	float DtoSRead;
+	float DtoSWrite;
+	long int StoDReadData;
+	long int StoDWriteData;
+	long int DtoSReadData;
+	long int DtoSWriteData;
 	try {
 		inFile.open("test_data.log");							//open log file
 		if (!inFile) {									//check if log file opened
