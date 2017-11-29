@@ -240,6 +240,12 @@ int main() {
 						}
 						WordCount--;
 					}
+				if(CommandLine.getReadWrite() == "Read"){
+					DtoSRead += getTime(time);
+					DtoSReadData += 4;
+				}else if(CommandLine.getReadWrite() == "Write"){
+					DtoSWrite += getTime(time);
+					DtoSWriteData += 4;              //This is for 4 bytes, we can make it 32 bits as well
 				}
 				cout << endl;
 			}
