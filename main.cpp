@@ -141,10 +141,10 @@ int main() {
 					}
 				if( CommandLine.getReadWrite() == "Read"){
 				StoDRead += getTime(time);
-				StoDReadData += 4;
+				StoDReadData += 4;				//increments 4 bytes, can be changed for 32 bits
 				}else if(CommandLine.getReadWrite() == "Write"){
 				StoDWrite += getTime(time);
-				StoDWriteData += 4;
+				StoDWriteData += 4;				//increments 4 bytes, can be changed for 32 bits
 					}
 				}
 				cout << endl;
@@ -242,10 +242,10 @@ int main() {
 					}
 				if(CommandLine.getReadWrite() == "Read"){
 					DtoSRead += getTime(time);
-					DtoSReadData += 4;
+					DtoSReadData += 4;		//increments 4 bytes, can be changed for 32 bits
 				}else if(CommandLine.getReadWrite() == "Write"){
 					DtoSWrite += getTime(time);
-					DtoSWriteData += 4;              //This is for 4 bytes, we can make it 32 bits as well
+					DtoSWriteData += 4;              //increments 4 bytes, can be changed for 32 bits
 				}
 				cout << endl;
 			}
