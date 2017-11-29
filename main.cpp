@@ -14,8 +14,6 @@ using std::cout;
 using std::endl;
 using std::string;
 using std::istringstream;
-int hexTodecimal(string);
-string hexTobinary(string);
 int main() {
 	std::ifstream inFile;
 	std::ofstream outFile;
