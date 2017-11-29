@@ -6,7 +6,26 @@
 //#pragma once
 #include<string>
 using std::string;
+float getTime(string n){
+switch(n.substr( n.length() - 2, 2)){
+case "ms":
+	float milliTime=static_cast<float>(n.substr(0,n.length()-2));
+	float decTime = milliTime * 0.001;
+	return decTime;
 
+case "ns":
+	float nanoTime=static_cast<float>(n.substr(0,n.length()-2));
+	float decTime = nanoTime * 0.000001;
+	return decTime;
+
+case "us":
+	float microTime=static_cast<float>(n.substr(0,n.length()-2));
+	float decTime = microTime * 0.000000001;
+	return decTime;
+
+default:
+}
+)
 string hexTobinary(string a) {				// function that take a hex string and returns a binary string
 	string temp = "";
 	char * c;
