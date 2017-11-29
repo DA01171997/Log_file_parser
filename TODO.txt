@@ -1,7 +1,0 @@
-We're going to split up the program into smaller tasks so we don't work on the same stuff.
-
-Stuff we still need:
-
-A way to look at individual bits
-Everything from the chart
-time stuff
