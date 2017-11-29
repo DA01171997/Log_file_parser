@@ -139,6 +139,13 @@ int main() {
 						}
 						WordCount++;
 					}
+				if( CommandLine.getReadWrite() == "Read"){
+				StoDRead += getTime(time);
+				StoDReadData += 4;
+				}else if(CommandLine.getReadWrite() == "Write"){
+				StoDWrite += getTime(time);
+				StoDWriteData += 4;
+					}
 				}
 				cout << endl;
 			}
@@ -232,13 +239,6 @@ int main() {
 							break;
 						}
 						WordCount--;
-					}
-				if( CommandLine.getReadWrite() == "Read"){
-				StoDRead += getTime(time);
-				StoDReadData += 4;
-				}else if(CommandLine.getReadWrite() == "Write"){
-				StoDWrite += getTime(time);
-				StoDWriteData += 4;
 					}
 				}
 				cout << endl;
