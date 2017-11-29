@@ -2,12 +2,30 @@
 //Group Charlie's Members: Abhyuday Vatsavai, Duy Do, Hasibullah Ziai, Jason Lieu
 //Course: CPSC 254 Tue Thr 6:00
 //Start Date: 11/22/2017 -Duy Do
-//Date last Modified: 11/27/2017 10:29AM -Duy Do 
-#pragma once
+//Date last Modified: 11/22/2017 5:40PM -Duy Do 
+//#pragma once
 #include<string>
-#include<cmath>
 using std::string;
+float getTime(string n){
+switch(n.substr( n.length() - 2, 2)){
+case "ms":
+	float milliTime=static_cast<float>(n.substr(0,n.length()-2));
+	float decTime = milliTime * 0.001;
+	return decTime;
 
+case "ns":
+	float nanoTime=static_cast<float>(n.substr(0,n.length()-2));
+	float decTime = nanoTime * 0.000001;
+	return decTime;
+
+case "us":
+	float microTime=static_cast<float>(n.substr(0,n.length()-2));
+	float decTime = microTime * 0.000000001;
+	return decTime;
+
+default:
+}
+)
 string hexTobinary(string a) {				// function that take a hex string and returns a binary string
 	string temp = "";
 	char * c;
@@ -93,5 +111,22 @@ int hexTodecimal(string a) {
 		}
 		counter++;
 	}
-	return (int) total;
+	return (int)total;
 }
+int hexToNumWord(int a) {
+	int NumWord = a / 2;
+	return NumWord;
+}
+int binaryToDecimal(string a) {
+	int stringNum = a.length();
+	int counter = 0;
+	double total = 0;
+	char * c;
+	for (int i = (stringNum - 1); i > -1; i--) {
+		c = &a[i];
+		if (*c == '1') { total += (pow(2, counter) * 1); }
+		counter++;
+	}
+	return (int)total;
+}
+//#pragma once

@@ -14,13 +14,23 @@ using std::cout;
 using std::endl;
 using std::string;
 using std::istringstream;
+
 using std::ifstream;
+
 int main() {
 	ifstream inFile;
 	ifstream Backup;						//used to get data from next line
 	std::ofstream outFile;
 	char * cTemp;
 
+	float StoDRead;
+	float StoDWrite;
+	float DtoSRead;
+	float DtoSWrite;
+	long int StoDReadData;
+	long int StoDWriteData;
+	long int DtoSReadData;
+	long int DtoSWriteData;
 
 	try {
 		inFile.open("test_data.log");							//open log file
@@ -59,6 +69,7 @@ int main() {
 		istringstream iss(line);
 		string useless, alsoUseless, time, uselessToo, veryUseless, superUseless, command, data, stillUseless, ReadWrite;
 		if (!(iss >> useless >> alsoUseless >> time >> uselessToo >> veryUseless >> superUseless >> command >> data >> stillUseless >> ReadWrite)) { break; }
+
 
 		istringstream issss(nextLine);
 		string a, b, nextTime, c, d, e, nextCommand;
@@ -162,12 +173,14 @@ int main() {
 				cout << endl;
 			}
 			if (reversed)
+
 			{
 
 				Line CommandLine = Line(command, ReadWrite, data);
 				cout << "Line " << lineCount << ": " << CommandLine.getReadWrite() << " " << CommandLine.getCommand() << ": " << hexTodecimal(CommandLine.getData()) / 2 << " words" << endl;
+
 				int WordCount = (hexTodecimal(CommandLine.getData()) / 2) - 1;
-				while (WordCount > 0)			//doesn't work yet b/c need to convert data hex to base10 and divide by 2
+				while (WordCount > 0)
 				{
 					getline(inFile, line);
 					getline(Backup, nextLine);
@@ -179,21 +192,23 @@ int main() {
 					string DataBinary = hexTobinary(SubLine.getData());
 					for (int subLineWord = 0; subLineWord < 2; subLineWord++) {
 						string HalfBinary = "";
+
 						if (subLineWord == 1) {
+
 							for (int i = 0; i < 16; i++) {
 								cTemp = &DataBinary[i];
 								HalfBinary += (*cTemp);
 							}
 						}
+
 						if (subLineWord == 0) {
+
 							for (int i = 16; i < 32; i++) {
 								cTemp = &DataBinary[i];
 								HalfBinary += (*cTemp);
 							}
 						}
 						reverse(HalfBinary.begin(), HalfBinary.end());
-
-						//		cout << endl << HalfBinary << "              "<< binaryToDecimal(HalfBinary.substr(13, 2))<<endl;
 
 						switch (WordCount) {
 						case 0:
@@ -252,15 +267,42 @@ int main() {
 							cout << "Line " << lineCount << ": word " << WordCount << ": Code = " << binaryToDecimal(HalfBinary.substr(8, 7)) << endl;
 							break;
 						}
+
 						WordCount--;
+
+					}
+				if( CommandLine.getReadWrite() == "Read"){
+				StoDRead += getTime(time);
+				StoDReadData += 4;				//increments 4 bytes, can be changed for 32 bits
+				}else if(CommandLine.getReadWrite() == "Write"){
+				StoDWrite += getTime(time);
+				StoDWriteData += 4;				//increments 4 bytes, can be changed for 32 bits
+
 					}
 				}
 				cout << endl;
 			}
+
+				if(CommandLine.getReadWrite() == "Read"){
+					DtoSRead += getTime(time);
+					DtoSReadData += 4;		//increments 4 bytes, can be changed for 32 bits
+				}else if(CommandLine.getReadWrite() == "Write"){
+					DtoSWrite += getTime(time);
+					DtoSWriteData += 4;              //increments 4 bytes, can be changed for 32 bits
+				}
+				cout << endl;
+			}
+
+
 		}
+
+
+
 	}
 	inFile.close();
+
 	Backup.close();
+
 	system("pause");
 	return 0;
 }
