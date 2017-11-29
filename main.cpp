@@ -178,7 +178,7 @@ int main() {
 			if (!reversed)
 			{
 				Line CommandLine = Line(command, ReadWrite, data);
-				 outFile<< "Line " << lineCount << ": " << CommandLine.getReadWrite() << " " << CommandLine.getCommand() << ": " << hexTodecimal(CommandLine.getData()) / 2 << " words" << endl;
+				outFile << "Line " << lineCount << ": " << CommandLine.getReadWrite() << " " << CommandLine.getCommand() << ": " << hexTodecimal(CommandLine.getData()) / 2 << " words" << endl;
 				int WordCount = 0;
 				while (WordCount < hexTodecimal(CommandLine.getData()) / 2)			//doesn't work yet b/c need to convert data hex to base10 and divide by 2
 				{
@@ -210,18 +210,21 @@ int main() {
 							if (binaryToDecimal(HalfBinary.substr(13, 2)) == 0) { outFile << "0 (no recording)" << endl; }
 							else if (binaryToDecimal(HalfBinary.substr(13, 2)) == 2) { outFile << "2 (no processing)" << endl; }
 							else if (binaryToDecimal(HalfBinary.substr(13, 2)) == 3) { outFile << "3 (processing & recording)" << endl; }
+							else outFile << binaryToDecimal(HalfBinary.substr(13, 2))<<" (unknown)" << endl;
 							break;
 						case 1:
 							outFile << "Line " << lineCount << ": word " << WordCount << ": Cmd_Type = ";
 							if (binaryToDecimal(HalfBinary.substr(13, 3)) == 4) { outFile << "4 (Type A)" << endl; }
 							else if (binaryToDecimal(HalfBinary.substr(13, 3)) == 5) { outFile << "5 (Type B)" << endl; }
 							else if (binaryToDecimal(HalfBinary.substr(13, 3)) == 6) { outFile << "6 (Type C)" << endl; }
-							else outFile << "1 (unknown)" << endl;
+							else outFile << binaryToDecimal(HalfBinary.substr(13, 3)) << " (unknown)" << endl;
 							break;
 						case 4:
 							outFile << "Line " << lineCount << ": word " << WordCount << ": Rec_Raw = ";
 							if (binaryToDecimal(HalfBinary.substr(0, 1)) == 0) { outFile << "0 (disable)" << endl; }
 							else if (binaryToDecimal(HalfBinary.substr(0, 1)) == 1) { outFile << "1 (enable)" << endl; }
+							else outFile << binaryToDecimal(HalfBinary.substr(0, 1)) << " (unknown)" << endl;
+
 							break;
 						case 5:
 							outFile << "Line " << lineCount << ": word " << WordCount << ": Cmd_ID = " << binaryToDecimal(HalfBinary.substr(0, 7)) << endl;
@@ -233,11 +236,13 @@ int main() {
 							outFile << "Line " << lineCount << ": word " << WordCount << ": Reset_Enabled = ";
 							if (binaryToDecimal(HalfBinary.substr(2, 1)) == 0) { outFile << "0 (disable)" << endl; }
 							else if (binaryToDecimal(HalfBinary.substr(2, 1)) == 1) { outFile << "1 (enable)" << endl; }
+							else outFile << binaryToDecimal(HalfBinary.substr(2, 1)) << " (unknown)" << endl;
 							break;
 						case 22:
 							outFile << "Line " << lineCount << ": word " << WordCount << ": Direction = ";
 							if (binaryToDecimal(HalfBinary.substr(3, 1)) == 0) { outFile << "0 (Right)" << endl; }
 							else if (binaryToDecimal(HalfBinary.substr(3, 1)) == 1) { outFile << "1 (Left)" << endl; }
+							else outFile << binaryToDecimal(HalfBinary.substr(3, 1)) << " (unknown)" << endl;
 							break;
 						case 32:
 							outFile << "Line " << lineCount << ": word " << WordCount << ": Num_Samples = " << binaryToDecimal(HalfBinary.substr(0, 15)) << endl;
@@ -246,16 +251,19 @@ int main() {
 							outFile << "Line " << lineCount << ": word " << WordCount << ": Parity = ";
 							if (binaryToDecimal(HalfBinary.substr(15, 1)) == 0) { outFile << "0 (even)" << endl; }
 							else if (binaryToDecimal(HalfBinary.substr(15, 1)) == 1) { outFile << "1 (odd)" << endl; }
+							else outFile << binaryToDecimal(HalfBinary.substr(15, 1)) << " (unknown)" << endl;
 							break;
 						case 38:
 							outFile << "Line " << lineCount << ": word " << WordCount << ": Test = ";
 							if (binaryToDecimal(HalfBinary.substr(14, 1)) == 0) { outFile << "0 (disable)" << endl; }
 							else if (binaryToDecimal(HalfBinary.substr(14, 1)) == 0) { outFile << "1 (enable)" << endl; }
+							else outFile << binaryToDecimal(HalfBinary.substr(14, 1)) << " (unknown)" << endl;
 							break;
 						case 40:
 							outFile << "Line " << lineCount << ": word " << WordCount << ": Ctrl_Enable = ";
 							if (binaryToDecimal(HalfBinary.substr(7, 1)) == 0) { outFile << "0 (disable)" << endl; }
 							else if (binaryToDecimal(HalfBinary.substr(7, 1)) == 0) { outFile << "0 (disable)" << endl; }
+							else outFile << binaryToDecimal(HalfBinary.substr(7, 1)) << " (unknown)" << endl;
 							break;
 						case 41:
 							outFile << "Line " << lineCount << ": word " << WordCount << ": Code = " << binaryToDecimal(HalfBinary.substr(8, 7)) << endl;
@@ -298,7 +306,7 @@ int main() {
 						}
 						reverse(HalfBinary.begin(), HalfBinary.end());
 
-						
+
 
 						switch (WordCount) {
 						case 0:
@@ -306,18 +314,21 @@ int main() {
 							if (binaryToDecimal(HalfBinary.substr(13, 2)) == 0) { outFile << "0 (no recording)" << endl; }
 							else if (binaryToDecimal(HalfBinary.substr(13, 2)) == 2) { outFile << "2 (no processing)" << endl; }
 							else if (binaryToDecimal(HalfBinary.substr(13, 2)) == 3) { outFile << "3 (processing & recording)" << endl; }
+							else outFile << binaryToDecimal(HalfBinary.substr(13, 2)) << " (unknown)" << endl;
 							break;
 						case 1:
 							outFile << "Line " << lineCount << ": word " << WordCount << ": Cmd_Type = ";
 							if (binaryToDecimal(HalfBinary.substr(13, 3)) == 4) { outFile << "4 (Type A)" << endl; }
 							else if (binaryToDecimal(HalfBinary.substr(13, 3)) == 5) { outFile << "5 (Type B)" << endl; }
 							else if (binaryToDecimal(HalfBinary.substr(13, 3)) == 6) { outFile << "6 (Type C)" << endl; }
-							else outFile << "1 (unknown)" << endl;
+							else outFile << binaryToDecimal(HalfBinary.substr(13, 3)) << " (unknown)" << endl;
 							break;
 						case 4:
 							outFile << "Line " << lineCount << ": word " << WordCount << ": Rec_Raw = ";
 							if (binaryToDecimal(HalfBinary.substr(0, 1)) == 0) { outFile << "0 (disable)" << endl; }
 							else if (binaryToDecimal(HalfBinary.substr(0, 1)) == 1) { outFile << "1 (enable)" << endl; }
+							else outFile << binaryToDecimal(HalfBinary.substr(0, 1)) << " (unknown)" << endl;
+
 							break;
 						case 5:
 							outFile << "Line " << lineCount << ": word " << WordCount << ": Cmd_ID = " << binaryToDecimal(HalfBinary.substr(0, 7)) << endl;
@@ -329,11 +340,13 @@ int main() {
 							outFile << "Line " << lineCount << ": word " << WordCount << ": Reset_Enabled = ";
 							if (binaryToDecimal(HalfBinary.substr(2, 1)) == 0) { outFile << "0 (disable)" << endl; }
 							else if (binaryToDecimal(HalfBinary.substr(2, 1)) == 1) { outFile << "1 (enable)" << endl; }
+							else outFile << binaryToDecimal(HalfBinary.substr(2, 1)) << " (unknown)" << endl;
 							break;
 						case 22:
 							outFile << "Line " << lineCount << ": word " << WordCount << ": Direction = ";
 							if (binaryToDecimal(HalfBinary.substr(3, 1)) == 0) { outFile << "0 (Right)" << endl; }
 							else if (binaryToDecimal(HalfBinary.substr(3, 1)) == 1) { outFile << "1 (Left)" << endl; }
+							else outFile << binaryToDecimal(HalfBinary.substr(3, 1)) << " (unknown)" << endl;
 							break;
 						case 32:
 							outFile << "Line " << lineCount << ": word " << WordCount << ": Num_Samples = " << binaryToDecimal(HalfBinary.substr(0, 15)) << endl;
@@ -342,16 +355,19 @@ int main() {
 							outFile << "Line " << lineCount << ": word " << WordCount << ": Parity = ";
 							if (binaryToDecimal(HalfBinary.substr(15, 1)) == 0) { outFile << "0 (even)" << endl; }
 							else if (binaryToDecimal(HalfBinary.substr(15, 1)) == 1) { outFile << "1 (odd)" << endl; }
+							else outFile << binaryToDecimal(HalfBinary.substr(15, 1)) << " (unknown)" << endl;
 							break;
 						case 38:
 							outFile << "Line " << lineCount << ": word " << WordCount << ": Test = ";
 							if (binaryToDecimal(HalfBinary.substr(14, 1)) == 0) { outFile << "0 (disable)" << endl; }
 							else if (binaryToDecimal(HalfBinary.substr(14, 1)) == 0) { outFile << "1 (enable)" << endl; }
+							else outFile << binaryToDecimal(HalfBinary.substr(14, 1)) << " (unknown)" << endl;
 							break;
 						case 40:
 							outFile << "Line " << lineCount << ": word " << WordCount << ": Ctrl_Enable = ";
 							if (binaryToDecimal(HalfBinary.substr(7, 1)) == 0) { outFile << "0 (disable)" << endl; }
 							else if (binaryToDecimal(HalfBinary.substr(7, 1)) == 0) { outFile << "0 (disable)" << endl; }
+							else outFile << binaryToDecimal(HalfBinary.substr(7, 1)) << " (unknown)" << endl;
 							break;
 						case 41:
 							outFile << "Line " << lineCount << ": word " << WordCount << ": Code = " << binaryToDecimal(HalfBinary.substr(8, 7)) << endl;
@@ -370,6 +386,3 @@ int main() {
 	//system("pause");
 	return 0;
 }
-
-
-
