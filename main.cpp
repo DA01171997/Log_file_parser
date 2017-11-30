@@ -10,6 +10,7 @@
 #include <sstream>
 #include <algorithm>
 #include <cmath>
+#include <stdlib.h>
 #include "Line.cpp"
 using std::cout;
 using std::endl;
@@ -17,6 +18,27 @@ using std::string;
 using std::istringstream;
 using std::ifstream;
 using std::reverse;
+/*
+double getDecTime(string n) {											//Function to convert to decimal time for counters
+	string timeSuffix = (n.substr(n.length() - 2));
+	
+	if (timeSuffix == "ms") {
+		double milliTime = std::stod(n.substr(0, n.length() - 2));
+		double decTime = milliTime * 0.001;
+		return decTime;
+	}
+	else if(timeSuffix == "ns") {
+		double nanoTime = std::stod(n.substr(0, n.length() - 2));
+		double decTime = nanoTime * 0.000001;
+		return decTime;
+	}
+	else if (timeSuffix == "us") {
+		double microTime = std::stod(n.substr(0, n.length() - 2));
+		double decTime = microTime * 0.000000001;
+		return decTime;
+	}
+};
+*/
 string hexTobinary(string a) {				// function that take a hex string and returns a binary string
 	string temp = "";
 	char * c;
@@ -125,7 +147,18 @@ int main() {
 	ifstream Backup;						//used to get data from next line
 	std::ofstream outFile;
 	char * cTemp;
-
+	
+	/*
+	double StoDRead = 0.00;
+	double StoDWrite = 0.00;
+	double DtoSRead = 0.00;
+	double DtoSWrite = 0.00;
+	long double StoDReadData = 0.00;
+	long double StoDWriteData = 0.00;
+	long double DtoSReadData = 0.00;
+	long double DtoSWriteData = 0.00;
+	*/
+	
 
 	try {
 		inFile.open("test_data.log");							//open log file
@@ -210,7 +243,7 @@ int main() {
 							if (binaryToDecimal(HalfBinary.substr(13, 2)) == 0) { outFile << "0 (no recording)" << endl; }
 							else if (binaryToDecimal(HalfBinary.substr(13, 2)) == 2) { outFile << "2 (no processing)" << endl; }
 							else if (binaryToDecimal(HalfBinary.substr(13, 2)) == 3) { outFile << "3 (processing & recording)" << endl; }
-							else outFile << binaryToDecimal(HalfBinary.substr(13, 2))<<" (unknown)" << endl;
+							else outFile << binaryToDecimal(HalfBinary.substr(13, 2)) << " (unknown)" << endl;
 							break;
 						case 1:
 							outFile << "Line " << lineCount << ": word " << WordCount << ": Cmd_Type = ";
@@ -271,6 +304,19 @@ int main() {
 						}
 						WordCount++;
 					}
+					/*
+					if (lineCount > 1) {
+						if (CommandLine.getReadWrite() == "Read") {                         //Okay so for this part I have to figure out
+							StoDRead += getDecTime(nextTime);								//How to change time to get rid of the last two letters,
+							StoDReadData += 32.00;											//so like using the substring subtraction
+						}
+						else if (CommandLine.getReadWrite() == "Write") {					//and working from there to figure out how to add the time from the 
+							StoDWrite += getDecTime(nextTime);								//previous line and work it into the running total
+							StoDWriteData += 32.00;
+						}
+					}
+					*/
+
 				}
 				outFile << endl;
 			}
@@ -375,14 +421,35 @@ int main() {
 						}
 						WordCount--;
 					}
+					/*
+					if (lineCount > 1){
+						if (CommandLine.getReadWrite() == "Read") {
+							DtoSRead += getDecTime(nextTime);
+							DtoSReadData += 32.00;
+						}
+						else if (CommandLine.getReadWrite() == "Write") {
+							DtoSWrite += getDecTime(nextTime);
+							DtoSWriteData += 32.00;
+
+						}
+					}
+					*/
+					
+					outFile << endl;
 				}
-				outFile << endl;
 			}
+		
+			
 		}
 	}
+	/*
+	outFile << "Read S-to-D: " << StoDReadData / StoDRead << "Megabits/sec\n";						//Calculation is wrong
+	outFile << "Read D-To-S: " << DtoSReadData / DtoSRead << "Megabits/sec\n";						//But it compiles
+	outFile << "Write S-To-D: " << StoDWriteData / StoDWrite << "Megabits/sec\n";
+	outFile << "Write D-To-S: " << DtoSWriteData / DtoSWrite << "Megabits/sec\n";
+	*/
 	inFile.close();
 	Backup.close();
 	outFile.close();
-	//system("pause");
 	return 0;
 }
