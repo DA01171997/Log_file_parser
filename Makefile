@@ -5,12 +5,12 @@
 #Date last Modified: 11/22/2017 5:47PM -Duy Do 
 default: main.exe
 
-parser.o: parser.h
-	g++ -c parser.h
-main.o: main.cpp parser.h
+Line.o: Line.cpp
+	g++ -c Line.cpp
+main.o: main.cpp Line.o
 	g++ -c main.cpp
-main.exe: main.o parser.o
-	g++ main.o parser.o -o main.exe
+main.exe: main.o Line.o
+	g++ main.o Line.o -o main.exe
 clean:
 	rm *.o *.exe 
 
