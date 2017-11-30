@@ -4,3 +4,8 @@ We are no longer using parser.h
   Incorporate that into main.cpp
 Also, there is a nextTime string available to you
   It holds the time of the next line
+
+
+Hasib @10pm:
+I'm trying to get the time and data portion fixed because the next-time string is what we should've been using the whole time.
+I just need some more time to get it to compile properly and I'll push it onto my branch and make a Pull request, trying to get this done before 12.
