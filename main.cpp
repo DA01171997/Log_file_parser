@@ -19,6 +19,7 @@ using std::string;
 using std::istringstream;
 using std::ifstream;
 using std::reverse;
+
 string hexTobinary(string a) {				// function that take a hex string and returns a binary string
 	string temp = "";
 	char * c;
@@ -115,7 +116,7 @@ int binaryToDecimal(string a) {
 	int counter = 0;
 	double total = 0;
 	char * c;
-	for (int i = (stringNum - 1); i > -1; i--) {
+	for (int i = 0; i < a.length(); i++) {
 		c = &a[i];
 		if (*c == '1') { total += (pow(2, counter) * 1); }
 		counter++;
