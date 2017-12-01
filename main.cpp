@@ -127,13 +127,13 @@ long double getTime(string a) {
 	long double time;
 	switch (*c) {
 	case 'm':
-		time = (atof((a.substr(0, a.length() - 2)).c_str())) ;
+		time = (atof((a.substr(0, a.length() - 2)).c_str())) * 0.001;
 		return time;
 	case 'u':
-		time = (atof((a.substr(0, a.length() - 2)).c_str())) *0.001;
+		time = (atof((a.substr(0, a.length() - 2)).c_str())) *0.000001;
 		return time;
 	case 'n':
-		time = (atof((a.substr(0, a.length() - 2)).c_str())) *0.000001;
+		time = (atof((a.substr(0, a.length() - 2)).c_str())) *0.000000001;
 		return time;
 	}
 }
@@ -511,16 +511,16 @@ int main() {
 	cout << "SDWBit : " << SDWriteData<<"   SDWTime : " << SDWriteTime << endl;
 	cout << "DSWBit : " << DSWriteData<<"   DSWTime : " << DSWriteTime << endl;
 
-	cout << std::fixed << std::setprecision(2)<< ((SDReadData / 1000000) / SDReadTime/1000) << endl;
+	cout << std::fixed << std::setprecision(2)<< ((SDReadData / 1000000) / SDReadTime) << endl;
 	//cout << SDReadData << "        " << SDReadTime << endl;
 
-	cout << std::fixed << std::setprecision(2)<<(DSReadData / 1000000)/DSReadTime/1000 << endl;
+	cout << std::fixed << std::setprecision(2)<<(DSReadData / 1000000)/DSReadTime << endl;
 	//cout << DSReadData << "        " << DSReadTime << endl;
 
-	cout << std::fixed << std::setprecision(2)<<(SDWriteData /1000000) /SDWriteTime/1000<< endl;
+	cout << std::fixed << std::setprecision(2)<<(SDWriteData /1000000) /SDWriteTime<< endl;
 	//cout << SDWriteData << "        " << SDWriteTime << endl;
 
-	cout << std::fixed << std::setprecision(2)<<(DSWriteData / 1000000)/ DSWriteTime/1000<< endl;
+	cout << std::fixed << std::setprecision(2)<<(DSWriteData / 1000000)/ DSWriteTime<< endl;
 	//cout << DSWriteData << "        " << DSWriteTime << endl;
 
 	inFile.close();
