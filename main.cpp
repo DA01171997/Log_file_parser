@@ -485,6 +485,5 @@ int main() {
 	inFile.close();
 	Backup.close();
 	outFile.close();
-	system("pause");
 	return 0;
 }
