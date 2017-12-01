@@ -212,13 +212,11 @@ int main() {
 					SDReadTime += getTime(nextTime);
 					SDReadData += (hexTodecimal(data)/2) *16;
 					SDReadData += 32;
-					//cout << "SDREAD : " <<SDReadData << endl;
 				}
 				else if (ReadWrite == "Wr") {
 					SDWriteTime += getTime(nextTime);
 					SDWriteData += (hexTodecimal(data)/2) *16;
 					SDWriteData += 32;
-					//cout << "SDWrite : "<<SDWriteData << endl;
 				}
 			}
 			if (command == "40000C18") {
@@ -226,33 +224,20 @@ int main() {
 					DSReadTime += getTime(nextTime);
 					DSReadData += (hexTodecimal(data)/2) *16;
 					DSReadData += 32;
-					//cout << "DSRead : "<< DSReadData << endl;
 				}
 				else if (ReadWrite == "Wr") {
 					DSWriteTime += getTime(nextTime);
 					DSWriteData += (hexTodecimal(data)/2) *16;
 					DSWriteData += 32;
-					//cout << "DSWrite : " <<DSWriteData << endl;
-
 				}
 			}
-
-
-
 			if (!reversed)
 			{
 				Line CommandLine = Line(command, ReadWrite, data);
 				outFile << "Line " << lineCount << ": " << CommandLine.getReadWrite() << " " << CommandLine.getCommand() << ": " << hexTodecimal(CommandLine.getData()) / 2 << " words" << endl;
 				int WordCount = 0;
-
-				
-
 				while (WordCount < hexTodecimal(CommandLine.getData()) / 2)
 				{
-
-					
-					
-
 					getline(inFile, line);
 					getline(Backup, nextLine);
 
@@ -263,22 +248,17 @@ int main() {
 					if (CommandLine.getCommand() == "S-to-D") {
 						if (CommandLine.getReadWrite() == "Read") {
 							SDReadTime += getTime(nextSubTime);
-							//SDReadData += 4;
 						}
 						else {
 							SDWriteTime += getTime(nextSubTime);
-							//SDWriteData += 4;
 						}
 					}
 					if (CommandLine.getCommand() == "D-to-S") {
 						if (CommandLine.getReadWrite() == "Read") {
 							DSReadTime += getTime(nextSubTime);
-							//DSReadData += 4;
 						}
 						else {
 							DSWriteTime += getTime(nextSubTime);
-							//DSWriteData += 4;
-
 						}
 					}
 					lineCount++;
@@ -373,16 +353,11 @@ int main() {
 			}
 			if (reversed)
 			{
-
 				Line CommandLine = Line(command, ReadWrite, data);
 				outFile << "Line " << lineCount << ": " << CommandLine.getReadWrite() << " " << CommandLine.getCommand() << ": " << hexTodecimal(CommandLine.getData()) / 2 << " words" << endl;
 				int WordCount = (hexTodecimal(CommandLine.getData()) / 2) - 1;
 				while (WordCount > 0)
 				{
-					
-					
-
-
 					getline(inFile, line);
 					getline(Backup, nextLine);
 					istringstream isssss(nextLine);
@@ -392,22 +367,17 @@ int main() {
 					if (CommandLine.getCommand() == "S-to-D") {
 						if (CommandLine.getReadWrite() == "Read") {
 							SDReadTime += getTime(nextSubTime);
-							//SDReadData += 4;
 						}
 						else {
 							SDWriteTime += getTime(nextSubTime);
-							//SDWriteData += 4;
 						}
 					}
 					if (CommandLine.getCommand() == "D-to-S") {
 						if (CommandLine.getReadWrite() == "Read") {
 							DSReadTime += getTime(nextSubTime);
-							//	DSReadData += 4;
 						}
 						else {
 							DSWriteTime += getTime(nextSubTime);
-							//DSWriteData += 4;
-
 						}
 					}
 
@@ -431,9 +401,6 @@ int main() {
 							}
 						}
 						reverse(HalfBinary.begin(), HalfBinary.end());
-
-
-
 						switch (WordCount) {
 						case 0:
 							outFile << "Line " << lineCount << ": word " << WordCount << ": Rec_ctrl = ";
@@ -506,22 +473,13 @@ int main() {
 			}
 		}
 	}
-	cout << "SDRBit : " << SDReadData<<"   SDRTime : " << SDReadTime << endl;
-	cout << "DSRBit : " << DSReadData << "   DSRTime : " << DSReadTime << endl;
-	cout << "SDWBit : " << SDWriteData<<"   SDWTime : " << SDWriteTime << endl;
-	cout << "DSWBit : " << DSWriteData<<"   DSWTime : " << DSWriteTime << endl;
+	outFile << std::fixed << std::setprecision(2)<< "Read S-to-D: "<<((SDReadData / 1000000) / SDReadTime) <<" Megabits/sec"<< endl;
 
-	cout << std::fixed << std::setprecision(2)<< ((SDReadData / 1000000) / SDReadTime) << endl;
-	//cout << SDReadData << "        " << SDReadTime << endl;
+	outFile << std::fixed << std::setprecision(2)<< "Read D-to-S: " << (DSReadData / 1000000)/DSReadTime << " Megabits/sec" << endl;
 
-	cout << std::fixed << std::setprecision(2)<<(DSReadData / 1000000)/DSReadTime << endl;
-	//cout << DSReadData << "        " << DSReadTime << endl;
+	outFile << std::fixed << std::setprecision(2)<< "Write D-to-S: " << (SDWriteData /1000000) /SDWriteTime << " Megabits/sec" << endl;
 
-	cout << std::fixed << std::setprecision(2)<<(SDWriteData /1000000) /SDWriteTime<< endl;
-	//cout << SDWriteData << "        " << SDWriteTime << endl;
-
-	cout << std::fixed << std::setprecision(2)<<(DSWriteData / 1000000)/ DSWriteTime<< endl;
-	//cout << DSWriteData << "        " << DSWriteTime << endl;
+	outFile << std::fixed << std::setprecision(2)<< "Write S-to-D: " << (DSWriteData / 1000000)/ DSWriteTime << " Megabits/sec" << endl;
 
 	inFile.close();
 	Backup.close();
